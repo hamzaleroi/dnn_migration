@@ -9,4 +9,5 @@ do
     code="$(awk '/_warning_/ { print $NF }' /tmp/cookie)"
     curl -Lb /tmp/cookie "https://drive.google.com/uc?export=download&confirm=${code}&id=$id" -o $name.tar
     tar -xvf  $name.tar --strip-components=1
+    rm -f $name.tar
 done <  $filename
