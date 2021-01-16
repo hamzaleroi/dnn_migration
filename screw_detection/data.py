@@ -181,4 +181,4 @@ if __name__ == '__main__':
   genTFRecords(train_data, train_labels,tf_train)
   print('Creating eval tfrecords')
   genTFRecords(eval_data, eval_labels,tf_eval)
-  shutil.rmtree(os.path.join(os.getcwd(),TFIDEN))
+
