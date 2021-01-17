@@ -1,6 +1,7 @@
 # Explaining the folders:
 ## SCREW CLASSIFICATION
 ### infer.py:
+
 usage: infer.py [-h]  
                 [--classification_model_location   CLASSIFICATION_MODEL_LOCATION]  
                 [--detection_model_location   DETECTION_MODEL_LOCATION]  
@@ -20,7 +21,7 @@ optional arguments:
                         Apply inference on a complete folder``
 
 
-### train.py
+### train.py:
 
 usage: train.py [-h] [--training_data TRAINING_DATA]
                 [--save_location SAVE_LOCATION]
