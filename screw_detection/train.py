@@ -167,6 +167,18 @@ mode_autosave = tf.keras.callbacks.ModelCheckpoint(WEIGHT_PATH,save_best_only=Tr
 early_stopping = tf.keras.callbacks.EarlyStopping(patience=8, verbose=1, mode = 'auto') 
 callbacks = [mode_autosave, lr_reducer,early_stopping]
 
+
+
+
+history = model.fit(train_ds,
+                    steps_per_epoch=STEPS_PER_EPOCH,
+                    epochs=EPOCHS,
+                    verbose=1,
+                    validation_data=eval_ds,
+                    validation_steps=EVAL_STEPS,
+                    callbacks=callbacks)
+
+
 if args.save_location != None:
     path = args.save_location
     if os.path.exists(path) and os.path.isdir(path) :
@@ -178,22 +190,6 @@ if args.save_location != None:
         print(f'wrong link saving to {SAVE_PATH}')
 else:
     SAVE_PATH= os.path.join(os.getcwd(),'weights','new_{}.h5'.format(iden))
-
-print(SAVE_PATH)
-model.save_weights(SAVE_PATH)
-
-history = model.fit(train_ds,
-                    steps_per_epoch=STEPS_PER_EPOCH,
-                    epochs=EPOCHS,
-                    verbose=1,
-                    validation_data=eval_ds,
-                    validation_steps=EVAL_STEPS,
-                    callbacks=callbacks)
-
-
-
-
-SAVE_PATH= args.save_location if args.save_location != None else  os.path.join(os.getcwd(),'weights','new_{}.h5'.format(iden))
 model.save_weights(SAVE_PATH)
 
 tp,fp,tn,fn=0,0,0,0
