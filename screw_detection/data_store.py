@@ -37,6 +37,7 @@ def create_h5_data(_dir,iden):
     print('Creating Data Store:',iden)
     data=[]
     for img_path in tqdm(glob(os.path.join(_dir,'*.*'))):
+        print(img_path)
         img=cv2.imread(img_path)
         img=cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
         img=cv2.resize(img, dim, interpolation = cv2.INTER_AREA)

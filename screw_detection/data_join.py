@@ -19,22 +19,22 @@ def merge_dir(_dir):
     global count
     for class_name in tqdm(class_names):
         if class_name=='non_screw':
-            class_dir=os.path.join(data_dir,class_name)
+            class_dir=os.path.join(ds_dir,class_name)
             create_dir(class_dir)
         else:
-            class_dir=os.path.join(data_dir,'screw')
+            class_dir=os.path.join(ds_dir,'screw')
             create_dir(class_dir)
             
         source_dir=os.path.join(_dir,class_name)
         
         for src_ipath in tqdm(glob(os.path.join(source_dir,'*.jpg'))):
             dest_ipath=os.path.join(class_dir,f"{count}.jpg")
-            shutil.copy(src_ipath,dest_ipath)
+            shutil.copyfile(src_ipath,dest_ipath)
             count+=1
         for src_ipath in tqdm(glob(os.path.join(source_dir,'*.png'))):
             dest_ipath=os.path.join(class_dir,f"{count}.png")
             print('copying {} to {} '.format(src_ipath,dest_ipath))
-            shutil.copy(src_ipath,dest_ipath)
+            shutil.copyfile(src_ipath,dest_ipath)
             count+=1
 
 
