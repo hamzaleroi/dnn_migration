@@ -51,10 +51,10 @@ To download the new custom dataset:
 
 1. Place  the ids of the tar files in the file ids.txt in the following format:  
 `<id>,<name>`  
-Note the name should match the corresponding folder in this current folder.
+Note the name should match the corresponding folder in this current folder. Also, there should be one new line per id in order to be considered. In other words, every new line ''\n' correspond to one file to be downloaded.
 
 2. run the script `download_from_drive` giving it `idx.txt` as first parameter
-3. the script should uncompress the data in the corresponding folders
+3. the script should un-compress the data in the corresponding folders
 
 
 # How to add data to the model:  
