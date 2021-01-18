@@ -10,6 +10,8 @@ from sklearn.metrics import confusion_matrix, roc_curve, precision_recall_curve,
 import efficientnet.tfkeras as efn
 import matplotlib.pyplot as plt
 import tensorflow as tf
+from cloud_tpu_client import Client
+
 
 def data_input_fn(mode,BUFFER_SIZE,BATCH_SIZE,IMG_DIM,data_dim,DATA_PATH): 
     
@@ -80,6 +82,16 @@ def get_input_args():
 
 
 
+Client().configure_tpu_version(tf.__version__, restart_type='ifNeeded')
+try:
+  tpu = tf.distribute.cluster_resolver.TPUClusterResolver()  # TPU detection
+  print('Running on TPU ', tpu.cluster_spec().as_dict()['worker'])
+except ValueError:
+  raise BaseException('ERROR: Not connected to a TPU runtime;')
+
+tf.config.experimental_connect_to_cluster(tpu)
+tf.tpu.experimental.initialize_tpu_system(tpu)
+tpu_strategy = tf.distribute.experimental.TPUStrategy(tpu)
 
 
 
@@ -156,12 +168,12 @@ if iden == 'efficientnetb2':
 
 
 
-
-model = create_model(IMG_DIM, NB_CLASS, NB_CHANNEL)
-model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=1e-5),
+with tpu_strategy.scope():
+  model = create_model(IMG_DIM,NB_CLASS,NB_CHANNEL)
+  model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=1e-5),
                 loss='categorical_crossentropy',
                 metrics=['accuracy'])
-if LOAD_WEIGHTS:
+  if LOAD_WEIGHTS:
     model.load_weights(WEIGHT_PATH)
 
 lr_reducer = tf.keras.callbacks.ReduceLROnPlateau(
