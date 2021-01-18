@@ -15,3 +15,4 @@ sklearn == 0.0
 tqdm == 4.41.1
 segmentation_models == 1.0.1
 tensorflow == 2.1.0
+cloud_tpu_client
