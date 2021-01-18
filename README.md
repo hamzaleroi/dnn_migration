@@ -44,7 +44,7 @@ Before downloading the data, make sure the structure of teh folders are respecte
 -> screw_detection  
 ----> ScrewCTF  
 
--> screw_detection   
+-> wire_detection   
 ----> WireDTF   
 
 To download the new custom dataset:
