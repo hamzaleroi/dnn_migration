@@ -68,7 +68,7 @@ if __name__ == '__main__':
     # TEST,NEW AND OLD UNZIPPED
     test_dir=os.path.join(work_dir,'test')
     train_dir =os.path.join(work_dir,'comb')
-    class_names=os.listdir(test_dir)
+    class_names=set(os.listdir(test_dir) + os.listdir(train_dir))
     print('Found Classes:',class_names)
     # helpers
 
