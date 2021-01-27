@@ -1,13 +1,5 @@
-<<<<<<< HEAD
-gcloud auth activate-service-account --key-file $1 || exit
-working_folder=$2
-bucket=$3
-sudo gsutil rm -r gs://$bucket/*
-sudo gsutil cp -r $working_folder gs://$bucket
-=======
 gcloud auth activate-service-account --key-file $1 2> /dev/null || echo 'error, could not connect to service account'
 working_folder=$2
 bucket=$3
 sudo gsutil rm -r gs://$bucket/* 2> /dev/null || echo 'error, the bucket may be empty'
 sudo gsutil cp -r $working_folder gs://$bucket 2> /dev/null || echo 'unable to copy files'
->>>>>>> 26a9e0db09a342a24f26201d506815c537d486f0
